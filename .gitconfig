@@ -1,0 +1,20 @@
+[user]
+        name = Evgeny Yakimov
+        email = john.yakimov@gmail.com
+[color]
+        ui = always
+        status = always
+        branch = always
+        diff = always
+[core]
+        pager = less -R
+        editor = vimx
+[alias]
+        logdog = log --decorate --oneline --graph
+        logdogsimple = log --decorate --oneline --graph --simplify-by-decoration
+        ci = commit -a
+        branchout = checkout -b
+        branches = branch --list
+        bo =  checkout -b
+        switch = checkout
+        ff = merge --ff-only
