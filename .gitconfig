@@ -8,13 +8,15 @@
         diff = always
 [core]
         pager = less -R
-        editor = vimx
+        editor = vim
+        excludesfile = C:/Users/John/.gitignore_global
 [alias]
         logdog = log --decorate --oneline --graph
         logdogsimple = log --decorate --oneline --graph --simplify-by-decoration
         ci = commit -a
         branchout = checkout -b
         branches = branch --list
-        bo =  checkout -b
+        bo = checkout -b
+        co = checkout
         switch = checkout
         ff = merge --ff-only
