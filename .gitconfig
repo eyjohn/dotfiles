@@ -9,7 +9,7 @@
 [core]
         pager = less -R
         editor = vim
-        excludesfile = C:/Users/John/.gitignore_global
+        excludesfile = ~/.gitignore_global
 [alias]
         logdog = log --decorate --oneline --graph
         logdogsimple = log --decorate --oneline --graph --simplify-by-decoration
