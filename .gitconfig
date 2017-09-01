@@ -20,3 +20,5 @@
         co = checkout
         switch = checkout
         ff = merge --ff-only
+[push]
+	default = simple
