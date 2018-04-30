@@ -18,7 +18,6 @@
         branches = branch --list
         bo = checkout -b
         co = checkout
-        switch = checkout
         ff = merge --ff-only
 [push]
-	default = simple
+        default = simple

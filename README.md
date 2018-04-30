@@ -1,4 +1,10 @@
-# misc
-This repo is for any misc files, configs or scripts that I like to use.
+# .dotfiles
+These are my aliases, scripts and other defaults.
+This is the first thing I install on a new environment.
 
-There is probably nothing here for you, but feel free to browse.
+## Installation
+
+```
+git clone https://github.com/eyjohn/dotfiles.git .dotfiles
+.dotfiles/install.sh
+```
