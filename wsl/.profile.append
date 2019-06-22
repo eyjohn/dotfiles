@@ -1,0 +1,12 @@
+# Set display
+export DISPLAY="0:0"
+
+# Start gnome-terminal by default
+if ! pgrep gnome-terminal; then
+  gnome-terminal
+fi
+
+# Start SSH if we havent already
+if ! pgrep sshd; then
+  sudo /usr/local/bin/start_ssh
+fi

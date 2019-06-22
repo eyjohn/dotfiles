@@ -5,6 +5,7 @@ This is the first thing I install on a new environment.
 ## Installation
 
 ```
-git clone https://github.com/eyjohn/dotfiles.git .dotfiles
-.dotfiles/install.sh
+git clone https://github.com/eyjohn/dotfiles.git
+cd dotfiles
+./install.sh
 ```
