@@ -1,6 +1,9 @@
 # Set display
 export DISPLAY="0:0"
 
+# WSL doesn't set umask
+umask 022
+
 # Start gnome-terminal by default
 if ! pgrep gnome-terminal; then
   gnome-terminal
@@ -10,6 +13,3 @@ fi
 if ! pgrep sshd; then
   sudo /usr/local/bin/start_ssh
 fi
-
-# Start SSH Agent
-eval $(ssh-agent -s)

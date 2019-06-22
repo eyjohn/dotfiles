@@ -39,10 +39,18 @@ if grep -q '#force_color_prompt=yes' ~/.bashrc; then
   sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
 fi
 
+# Create bin
+if [ ! -d bin ]; then
+  echo "Creating ~/bin"
+  mkdir -p ~/bin
+fi
+
 # WSL Specifics
 if grep -q Microsoft /proc/version; then
   echo "Detected WSL Environment"
 
   # Set DISPLAY and autolaunch gnome-term
   append_file ~/.profile "source ~/.dotfiles/wsl/.profile.append"
+  append_file ~/.bashrc "source ~/.dotfiles/wsl/.bashrc.append"
 fi
+
