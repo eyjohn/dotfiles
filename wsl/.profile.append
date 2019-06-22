@@ -10,3 +10,6 @@ fi
 if ! pgrep sshd; then
   sudo /usr/local/bin/start_ssh
 fi
+
+# Start SSH Agent
+eval $(ssh-agent -s)
