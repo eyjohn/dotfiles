@@ -4,6 +4,11 @@ export DISPLAY="0:0"
 # WSL doesn't set umask
 umask 022
 
+# Start SSH Agent
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent -s`
+fi
+
 # Start gnome-terminal by default
 if ! pgrep gnome-terminal; then
   gnome-terminal

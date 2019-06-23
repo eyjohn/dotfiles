@@ -51,6 +51,5 @@ if grep -q Microsoft /proc/version; then
 
   # Set DISPLAY and autolaunch gnome-term
   append_file ~/.profile "source ~/.dotfiles/wsl/.profile.append"
-  append_file ~/.bashrc "source ~/.dotfiles/wsl/.bashrc.append"
 fi
 
