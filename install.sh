@@ -28,6 +28,11 @@ function append_file {
   fi
 }
 
+function confirm {
+  read -p "$1" -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]
+  return $?
+}
+
 # Symlink all included base files
 LINK_FILES=(.gitconfig .gitignore_global .bash_aliases)
 for file in ${LINK_FILES[@]}; do
