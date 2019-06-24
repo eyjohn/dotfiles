@@ -1,9 +1,10 @@
 #!/bin/bash
 echo "Installing dotfiles"
 
+BASE="$( cd "$(dirname "$0")" ; pwd -P )"
+
 if [ ! -L ~/.dotfiles ]; then
   echo "Adding .dotfiles link"
-  BASE="$( cd "$(dirname "$0")" ; pwd -P )"
   ln -s "$BASE" ~/.dotfiles
 fi
 
@@ -48,8 +49,5 @@ fi
 # WSL Specifics
 if grep -q Microsoft /proc/version; then
   echo "Detected WSL Environment"
-
-  # Set DISPLAY and autolaunch gnome-term
-  append_file ~/.profile "source ~/.dotfiles/wsl/.profile.append"
+  source $BASE/wsl/install.sh
 fi
-
