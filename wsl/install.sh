@@ -16,6 +16,6 @@ fi
 if confirm "Installing gnome-terminal? [y/n]: "; then
   sudo apt -y install dbus-x11 gnome-terminal
   sudo systemd-machine-id-setup
-  cp -asvb ~/.dotfiles/wsl/.profile.d/40_wsl_gnome_terminal ~/.profile.d/
+  cp -asvb ~/.dotfiles/wsl/.profile.d/90_wsl_gnome_terminal ~/.profile.d/
   echo "NOTE: Make sure you've installed VcXsrv - https://sourceforge.net/projects/vcxsrv/"
 fi
