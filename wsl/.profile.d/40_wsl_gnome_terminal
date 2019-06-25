@@ -1,0 +1,4 @@
+# Start gnome-terminal by default
+if ! pgrep -u $USER gnome-terminal; then
+  gnome-terminal
+fi

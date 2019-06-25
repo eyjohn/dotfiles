@@ -1,0 +1,4 @@
+# Start SSH if we havent already
+if ! pgrep sshd; then
+  sudo /usr/local/bin/start_ssh
+fi
