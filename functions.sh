@@ -13,9 +13,18 @@ function insert_file {
       echo "Appending $cmd to $target"
       echo "$cmd" >> $target
     else
-      echo "Appending $cmd to $target before $before"
-      sed "/^$(escape $before)/i $(escape $cmd)" -i $target 
+      echo "Inserting $cmd to $target before $before"
+      sed "/^$(escape $before)/i $(escape $cmd)\n" -i $target
     fi
+  fi
+}
+
+function prepend_file {
+  target=$1
+  cmd="$2"
+  if ! grep -q "$(escape $cmd)" $target; then
+    echo "Prepending $cmd to $target"
+    sed "1s/^/$(escape $cmd)\n/" -i $target 
   fi
 }
 

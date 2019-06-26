@@ -10,12 +10,16 @@ if [ ! -L ~/.dotfiles ]; then
   ln -s "$BASE" ~/.dotfiles
 fi
 
-DIRS=(.profile.d/ bin/)
-mkdir ${TARGETS[@]/#/~/}
+mkdir -m 0700 ~/.ssh
+
+DIRS=(.profile.d/ bin/ .ssh/config.d)
+mkdir -p ${DIRS[@]/#/~/}
 
 TARGETS=(.bash_aliases .gitconfig .gitignore_global)
 cp -asvb ${TARGETS[@]/#/~/.dotfiles/} ~/
 
+[ ! -f ~/.ssh/config ] && echo > ~/.ssh/config # Add blank line for prepend to work
+prepend_file ~/.ssh/config 'Include config.d/*'
 insert_file ~/.profile 'for f in ~/.profile.d/*[^~]; do source $f; done'
 
 # Force colour mode on ubuntu .bashrc
