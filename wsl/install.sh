@@ -7,7 +7,7 @@ fi
 if confirm "Installing ssh startup on launch? [y/n]: "; then
   sudo apt -y purge openssh-server
   sudo apt -y install openssh-server
-  sudo cp -p ~/.dotfiles/wsl/usr/local/bin/start_ssh /usr/local/bin/
+  sudo cp --preserve=mode ~/.dotfiles/wsl/usr/local/bin/start_ssh /usr/local/bin/
   sudo cp ~/.dotfiles/wsl/etc/sudoers.d/start_ssh /etc/sudoers.d/
   sudo /usr/local/bin/start_ssh
   cp -asvb ~/.dotfiles/wsl/.profile.d/22_wsl_ssh_server ~/.profile.d/
