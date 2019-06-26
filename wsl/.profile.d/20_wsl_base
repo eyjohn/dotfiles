@@ -3,21 +3,3 @@ export DISPLAY="0:0"
 
 # WSL doesn't set umask
 umask 022
-
-# Start Global SSH Agent
-export SSH_AUTH_SOCK=~/.ssh/ssh-agent.$HOSTNAME.sock
-
-if ! pgrep -u $USER ssh-agent; then
-  rm "$SSH_AUTH_SOCK"
-  ssh-agent -s -a "$SSH_AUTH_SOCK" > /dev/null
-fi
-
-# Start gnome-terminal by default
-if ! pgrep -u $USER gnome-terminal; then
-  gnome-terminal
-fi
-
-# Start SSH if we havent already
-if ! pgrep sshd; then
-  sudo /usr/local/bin/start_ssh
-fi
