@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Chrome Web Browser
+GenericName=Web Browser
+Comment=Access the Internet
+Exec=/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe %U
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=chrome-browser
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml_xml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
