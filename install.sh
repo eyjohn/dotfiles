@@ -12,11 +12,14 @@ fi
 
 mkdir -m 0700 ~/.ssh
 
-DIRS=(.profile.d/ bin/ .ssh/config.d)
+DIRS=(.profile.d/ bin/ .ssh/config.d .ssh/sockets)
 mkdir -p ${DIRS[@]/#/~/}
 
 TARGETS=(.bash_aliases .gitconfig .gitignore_global)
 cp -asvb ${TARGETS[@]/#/~/.dotfiles/} ~/
+
+# .ssh/config.d doesn't support backups
+cp -asvi ~/.dotfiles/.ssh/config.d/github ~/.ssh/config.d/
 
 [ ! -f ~/.ssh/config ] && echo > ~/.ssh/config # Add blank line for prepend to work
 prepend_file ~/.ssh/config 'Include config.d/*'
