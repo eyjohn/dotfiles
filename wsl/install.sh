@@ -28,8 +28,8 @@ if confirm "Set chrome.exe as launcher for gnome-terminal? [y/n]: "; then
   gio mime x-scheme-handler/https chrome.desktop
 fi
 
-if confirm "Install minikube.exe helpers ssh/load_minikube_env? [y/n]: "; then
-  cp -asvi ~/.dotfiles/wsl/bin/load_minikube_env ~/bin/
+if confirm "Install minikube.exe helpers ssh/minikube-env? [y/n]: "; then
+  cp -asvi ~/.dotfiles/wsl/bin/minikube-env ~/bin/
   cp -asvi ~/.dotfiles/wsl/.ssh/config.d/minikube ~/.ssh/config.d/
   echo 'NOTE: Install choco/minikube on Windows'
   echo 'NOTE: Add windows user to "Hyper-V Administrators"'
