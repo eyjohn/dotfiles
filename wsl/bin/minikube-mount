@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BASE="$1"
+if [ -n "$2" ]; then
+  MOUNT="$2"
+else
+  MOUNT="$BASE"
+fi
+
+WINDIR=$(wslpath -w $(realpath $BASE))
+echo "Mounting $WINDIR as $MOUNT"
+minikube.exe mount "$WINDIR:$MOUNT"
