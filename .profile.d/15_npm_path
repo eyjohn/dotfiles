@@ -1,0 +1,2 @@
+# Patch local npm bin to PATH
+export PATH=${PATH//:\/usr\/local\/sbin:/:/home/$USER/.npm-packages/bin:\/usr\/local\/sbin:}

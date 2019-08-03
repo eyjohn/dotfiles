@@ -31,6 +31,16 @@ if grep -q '#force_color_prompt=yes' ~/.bashrc; then
   sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
 fi
 
+if confirm "Install and configure npm? [y/n]: "; then
+  sudo apt -y install npm
+  touch ~/.npmrc
+  sed -i "/^prefix/d" ~/.npmrc
+  mkdir -p ~/.npm-packages/
+  echo prefix = ~/.npm-packages/ > ~/.npmrc
+  cp -asvb ~/.dotfiles/.profile.d/15_npm_path ~/.profile.d/
+fi
+
+
 # WSL Specifics
 if grep -q Microsoft /proc/version; then
   echo "Detected WSL Environment"
