@@ -18,6 +18,8 @@
         branches = branch --list
         bo = checkout -b
         co = checkout
-        ff = merge --ff-only
+	ff = merge --ff-only
+	amend = commit --amend
+	ammend = commit --amend
 [push]
         default = simple
