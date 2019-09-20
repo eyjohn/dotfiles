@@ -40,6 +40,11 @@ if confirm "Install and configure npm? [y/n]: "; then
   cp -asvb ~/.dotfiles/.profile.d/15_npm_path ~/.profile.d/
 fi
 
+if confirm "Install and configure golang? [y/n]: "; then
+  sudo apt -y install golang-go
+  cp -asvb ~/.dotfiles/.profile.d/16_go_path ~/.profile.d/
+fi
+
 
 # WSL Specifics
 if grep -q Microsoft /proc/version; then
