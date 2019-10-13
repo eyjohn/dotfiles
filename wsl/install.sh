@@ -31,6 +31,7 @@ fi
 if confirm "Install minikube.exe helpers ssh/minikube-env/mount? [y/n]: "; then
   cp -asvi ~/.dotfiles/wsl/bin/minikube-env ~/bin/
   cp -asvi ~/.dotfiles/wsl/bin/minikube-mount ~/bin/
+  cp -asvi ~/.dotfiles/wsl/bin/minikube-mount-sshfs ~/bin/
   cp -asvi ~/.dotfiles/wsl/.ssh/config.d/minikube ~/.ssh/config.d/
   echo 'NOTE: Install choco/minikube on Windows'
   echo 'NOTE: Add windows user to "Hyper-V Administrators"'
