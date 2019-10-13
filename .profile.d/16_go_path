@@ -1,0 +1,2 @@
+# Patch local GO bin to PATH
+export PATH=${PATH//:\/usr\/local\/sbin:/:/home/$USER/go/bin:\/usr\/local\/sbin:}
