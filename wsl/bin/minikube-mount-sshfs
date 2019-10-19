@@ -17,4 +17,4 @@ ssh minikube sudo mkdir -p -m 777 "$MOUNT"
 ssh minikube fusermount -u "$MOUNT"
 
 # Connect in foreground mode
-ssh -R 20202:localhost:22 minikube sshfs -f -d -o NoHostAuthenticationForLocalhost=yes -o IdentityFile='~/.ssh/minikube' -o port=20202 -o nonempty $USER@localhost:"$BASE/" "$MOUNT"
+ssh -R 20202:localhost:22 minikube sudo sshfs -f -d -o NoHostAuthenticationForLocalhost=yes -o IdentityFile='~/.ssh/minikube' -o port=20202 -o nonempty -o allow_other $USER@localhost:"$BASE/" "$MOUNT"
