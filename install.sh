@@ -45,6 +45,9 @@ if confirm "Install and configure golang? [y/n]: "; then
   cp -asvb ~/.dotfiles/.profile.d/16_go_path ~/.profile.d/
 fi
 
+# Install brigade namespace always (lightweight)
+cp -asvb ~/.dotfiles/.profile.d/17_brigade_namespace ~/.profile.d/
+
 
 # WSL Specifics
 if grep -q Microsoft /proc/version; then

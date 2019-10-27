@@ -11,7 +11,7 @@ fi
 rm ~/.ssh/minikube*
 ssh-keygen -f ~/.ssh/minikube -N "" -C "minikube-sshfs"
 sed -i '/minikube-sshfs$/d' ~/.ssh/authorized_keys
-cat .ssh/minikube.pub >> ~/.ssh/authorized_keys
+cat ~/.ssh/minikube.pub >> ~/.ssh/authorized_keys
 scp -p ~/.ssh/minikube minikube:~/.ssh/
 ssh minikube sudo mkdir -p -m 777 "$MOUNT"
 ssh minikube fusermount -u "$MOUNT"

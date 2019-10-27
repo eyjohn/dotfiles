@@ -1,0 +1,2 @@
+# Brigade is normally installed in this namespace
+export BRIGADE_NAMESPACE=brigade
