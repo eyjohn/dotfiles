@@ -48,6 +48,9 @@ fi
 # Install brigade namespace always (lightweight)
 cp -asvb ~/.dotfiles/.profile.d/17_brigade_namespace ~/.profile.d/
 
+if confirm "Install kubectl autocomplete? [y/n]: "; then
+  cp -asvb ~/.dotfiles/.profile.d/18_kubectl_autocomplete ~/.profile.d/
+fi
 
 # WSL Specifics
 if grep -q Microsoft /proc/version; then
