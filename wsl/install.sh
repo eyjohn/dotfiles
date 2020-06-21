@@ -26,6 +26,10 @@ if confirm "Set chrome.exe as launcher for gnome-terminal? [y/n]: "; then
   cp -asvb ~/.dotfiles/wsl/.local ~/
   gio mime x-scheme-handler/http chrome.desktop
   gio mime x-scheme-handler/https chrome.desktop
+  # Load defaults for gnome-terminal
+  dconf load /org/gnome/terminal/legacy/profiles:/ <<< "[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+login-shell=true
+use-theme-colors=false"
 fi
 
 if confirm "Install minikube.exe helpers ssh/minikube-env/mount? [y/n]: "; then
