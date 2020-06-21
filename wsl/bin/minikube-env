@@ -10,7 +10,7 @@ export DOCKER_CERT_PATH=$(wslpath $DOCKER_CERT_PATH)
 # Copy minikube config, patch paths, and load as "second" config file
 sed -e 's/\\/\//g' -e "s/\s\([A-Z]\):/ \/mnt\/\L\1/" ~/winhome/.kube/config > ~/.kube/config.minikube
 [ -z "$KUBECONFIG" ] && export KUBECONFIG=~/.kube/config
-[[ ! "$KUBECONFIG" =~ ~/.kube/config.minikube ]] && export KUBECONFIG=$KUBECONFIG:~/.kube/config.minikube
+[[ ! "$KUBECONFIG" =~ ~/.kube/config.minikube ]] && export KUBECONFIG=~/.kube/config.minikube:$KUBECONFIG
 
 echo "export DOCKER_TLS_VERIFY=\"$DOCKER_TLS_VERIFY\""
 echo "export DOCKER_HOST=\"$DOCKER_HOST\""
