@@ -1,7 +1,11 @@
 cp -asvb ~/.dotfiles/wsl/.profile.d/20_wsl_base ~/.dotfiles/wsl/.profile.d/21_wsl_ssh_agent ~/.profile.d/
 
-if confirm "Update wsl.conf? (you'll need to relaunch wsl)? [y/n]: "; then
+if [ "$WSL_VERSION" == 1 ] && confirm "Update wsl.conf? (you'll need to relaunch wsl)? [y/n]: "; then
   sudo cp ~/.dotfiles/wsl/etc/wsl.conf /etc/wsl.conf
+fi
+
+if [ "$WSL_VERSION" == 2 ] && confirm "Fix /var/run/docker.sock permissions? [y/n]: "; then
+  sudo setfacl --modify user:john:rw /var/run/docker.sock
 fi
 
 if confirm "Installing ssh startup on launch? [y/n]: "; then
@@ -30,13 +34,4 @@ if confirm "Set chrome.exe as launcher for gnome-terminal? [y/n]: "; then
   dconf load /org/gnome/terminal/legacy/profiles:/ <<< "[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 login-shell=true
 use-theme-colors=false"
-fi
-
-if confirm "Install minikube.exe helpers ssh/minikube-env/mount? [y/n]: "; then
-  cp -asvi ~/.dotfiles/wsl/bin/minikube-env ~/bin/
-  cp -asvi ~/.dotfiles/wsl/bin/minikube-mount ~/bin/
-  cp -asvi ~/.dotfiles/wsl/bin/minikube-mount-sshfs ~/bin/
-  cp -asvi ~/.dotfiles/wsl/.ssh/config.d/minikube ~/.ssh/config.d/
-  echo 'NOTE: Install choco/minikube on Windows'
-  echo 'NOTE: Add windows user to "Hyper-V Administrators"'
 fi

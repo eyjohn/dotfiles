@@ -53,7 +53,8 @@ if confirm "Install kubectl autocomplete? [y/n]: "; then
 fi
 
 # WSL Specifics
-if grep -q Microsoft /proc/version; then
-  echo "Detected WSL Environment"
+WSL_VERSION=$(wsl.exe -l -v | sed $'s/[^[:print:]\t]//g' | grep -a '[*]' | awk '{print $4}')
+if [ -n "$WSL_VERSION" ]; then
+  echo "Detected WSL Environment, Version: $WSL_VERSION"
   source $BASE/wsl/install.sh
 fi
