@@ -61,6 +61,13 @@ if which kubectl > /dev/null && confirm "Install kubectl autocomplete? [y/n]: ";
   cp -asvb ~/.dotfiles/.profile.d/18_kubectl_autocomplete ~/.profile.d/
 fi
 
+if confirm "Install helm? [y/n]: "; then
+  # Uncomment when the latest version is 3 or above
+  # HELM_URL=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep body.*linux-amd64.tar.gz | sed s'/.*(\(.*linux-amd64.tar.gz\)).*/\1/')
+  HELM_URL=https://get.helm.sh/helm-v3.3.0-linux-amd64.tar.gz
+  wget -O - $HELM_URL | tar xz --strip-components=1 -C ~/bin/ linux-amd64/helm
+fi
+
 if confirm "Install brig (Brigade CLI)? [y/n]: "; then
   curl -s https://api.github.com/repos/brigadecore/brigade/releases/latest \
     | grep "browser_download_url.*linux-amd64" \
