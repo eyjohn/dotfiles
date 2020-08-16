@@ -61,6 +61,10 @@ if which kubectl > /dev/null && confirm "Install kubectl autocomplete? [y/n]: ";
   cp -asvb ~/.dotfiles/.profile.d/18_kubectl_autocomplete ~/.profile.d/
 fi
 
+if which kubectl > /dev/null && confirm "Set KUBECONFIG=~/.kube/* [y/n]: "; then
+  cp -asvb ~/.dotfiles/.profile.d/19_kubectl_kubeconfig ~/.profile.d/
+fi
+
 if confirm "Install helm? [y/n]: "; then
   # Uncomment when the latest version is 3 or above
   # HELM_URL=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep body.*linux-amd64.tar.gz | sed s'/.*(\(.*linux-amd64.tar.gz\)).*/\1/')
