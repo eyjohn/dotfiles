@@ -5,7 +5,7 @@ if [ "$WSL_VERSION" == 1 ] && confirm "Update wsl.conf? (you'll need to relaunch
 fi
 
 if [ "$WSL_VERSION" == 2 ] && confirm "Fix /var/run/docker.sock permissions? [y/n]: "; then
-  sudo setfacl --modify user:john:rw /var/run/docker.sock
+  sudo usermod -aG docker ${USER}
 fi
 
 if confirm "Installing ssh startup on launch? [y/n]: "; then
