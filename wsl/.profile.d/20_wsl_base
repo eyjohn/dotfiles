@@ -1,4 +1,4 @@
-source "~/.dotfiles/wsl/functions.sh"
+source ~/.dotfiles/wsl/functions.sh
 export WSL_VERSION=$(get_wsl_version)
 export WSL_HOST=localhost
 
