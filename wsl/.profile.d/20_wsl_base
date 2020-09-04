@@ -1,4 +1,5 @@
-export WSL_VERSION=$(wsl.exe -l -v | sed $'s/[^[:print:]\t]//g' | grep -a '[*]' | awk '{print $4}')
+source "~/.dotfiles/wsl/functions.sh"
+export WSL_VERSION=$(get_wsl_version)
 export WSL_HOST=localhost
 
 if [ "$WSL_VERSION" == 1 ]; then

@@ -4,6 +4,7 @@ echo "Installing dotfiles"
 BASE="$( cd "$(dirname "$0")" ; pwd -P )"
 
 source "$BASE/functions.sh"
+source "$BASE/wsl/functions.sh"
 
 if [ ! -L ~/.dotfiles ]; then
   echo "Adding .dotfiles link"
@@ -93,7 +94,7 @@ if confirm "Install gcloud SDK? [y/n]: "; then
 fi
 
 # WSL Specifics
-WSL_VERSION=$(wsl.exe -l -v | sed $'s/[^[:print:]\t]//g' | grep -a '[*]' | awk '{print $4}')
+WSL_VERSION=$(get_wsl_version)
 if [ -n "$WSL_VERSION" ]; then
   echo "Detected WSL Environment, Version: $WSL_VERSION"
   source $BASE/wsl/install.sh
