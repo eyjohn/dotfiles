@@ -36,13 +36,9 @@ if git --git-dir "$BASE/.git" remote get-url origin | grep -q ://github.com && c
   git --git-dir "$BASE/.git" remote set-url origin "$GIT_REMOTE"
 fi
 
-if confirm "Install and configure npm? [y/n]: "; then
-  sudo apt -y install npm
-  touch ~/.npmrc
-  sed -i "/^prefix/d" ~/.npmrc
-  mkdir -p ~/.npm-packages/
-  echo prefix = ~/.npm-packages/ > ~/.npmrc
-  cp -asvb ~/.dotfiles/.profile.d/15_npm_path ~/.profile.d/
+if confirm "Install and configure node/npm? [y/n]: "; then
+  curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+  sudo apt-get install -y nodejs
 fi
 
 if confirm "Install and configure golang? [y/n]: "; then
