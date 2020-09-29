@@ -13,7 +13,7 @@ fi
 
 mkdir -m 0700 ~/.ssh
 
-DIRS=(.profile.d/ bin/ .ssh/config.d .ssh/sockets)
+DIRS=(.profile.d .bashrc.d bin .ssh/config.d .ssh/sockets)
 mkdir -p ${DIRS[@]/#/~/}
 
 TARGETS=(.bash_aliases .gitconfig .gitignore_global)
@@ -25,6 +25,7 @@ cp -asvi ~/.dotfiles/.ssh/config.d/github ~/.ssh/config.d/
 [ ! -f ~/.ssh/config ] && echo > ~/.ssh/config # Add blank line for prepend to work
 prepend_file ~/.ssh/config 'Include config.d/*'
 insert_file ~/.profile 'for f in ~/.profile.d/*[^~]; do source $f; done'
+insert_file ~/.bashrc 'for f in ~/.bashrc.d/*[^~]; do source $f; done'
 
 if grep -q '#force_color_prompt=yes' ~/.bashrc; then 
   echo "Patching .bashrc to force_color_prompt=yes"
@@ -55,7 +56,7 @@ if confirm "Install kubectl? [y/n]: "; then
 fi
 
 if which kubectl > /dev/null && confirm "Install kubectl autocomplete? [y/n]: "; then
-  cp -asvb ~/.dotfiles/.profile.d/18_kubectl_autocomplete ~/.profile.d/
+  cp -asvb ~/.dotfiles/.bashrc.d/18_kubectl_autocomplete ~/.bashrc.d/
 fi
 
 if which kubectl > /dev/null && confirm "Set KUBECONFIG=~/.kube/* [y/n]: "; then
