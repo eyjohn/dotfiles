@@ -8,6 +8,11 @@ if [ "$WSL_VERSION" == 2 ] && confirm "Fix /var/run/docker.sock permissions? [y/
   sudo usermod -aG docker ${USER}
 fi
 
+if [ "$WSL_VERSION" == 2 ] && confirm "Fix screen dir issue for user? [y/n]: "; then
+  sudo usermod -aG docker ${USER}
+  cp -asvb ~/.dotfiles/wsl/.profile.d/24_wsl_fix_screen ~/.profile.d/
+fi
+
 if confirm "Installing ssh startup on launch? [y/n]: "; then
   sudo apt -y purge openssh-server
   sudo apt -y install openssh-server
@@ -17,21 +22,9 @@ if confirm "Installing ssh startup on launch? [y/n]: "; then
   cp -asvb ~/.dotfiles/wsl/.profile.d/22_wsl_ssh_server ~/.profile.d/
 fi
 
-if confirm "Installing gnome-terminal? [y/n]: "; then
-  sudo apt -y install dbus-x11 gnome-terminal
+if confirm "Installing X11 Display support? [y/n]: "; then
+  sudo apt -y install dbus-x11
   sudo systemd-machine-id-setup
-  cp -asvb ~/.dotfiles/wsl/.profile.d/90_wsl_gnome_terminal ~/.profile.d/
+  cp -asvb ~/.dotfiles/wsl/.profile.d/23_wsl_display ~/.profile.d/
   echo "NOTE: Make sure you've installed VcXsrv - https://sourceforge.net/projects/vcxsrv/"
-fi
-
-if confirm "Set chrome.exe as launcher for gnome-terminal? [y/n]: "; then
-  sudo apt -y install libglib2.0-bin
-  # Copy chrome.desktop
-  cp -asvb ~/.dotfiles/wsl/.local ~/
-  gio mime x-scheme-handler/http chrome.desktop
-  gio mime x-scheme-handler/https chrome.desktop
-  # Load defaults for gnome-terminal
-  dconf load /org/gnome/terminal/legacy/profiles:/ <<< "[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
-login-shell=true
-use-theme-colors=false"
 fi

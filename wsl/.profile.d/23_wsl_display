@@ -1,0 +1,6 @@
+# Set display
+export DISPLAY="$WSL_HOST:0"
+
+# Windows XSrv config
+export $(dbus-launch)
+export LIBGL_ALWAYS_INDIRECT=1

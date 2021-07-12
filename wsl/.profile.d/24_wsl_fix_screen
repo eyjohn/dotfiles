@@ -1,0 +1,2 @@
+mkdir ~/.screen 2>/dev/null && chmod 700 ~/.screen
+export SCREENDIR=~/.screen

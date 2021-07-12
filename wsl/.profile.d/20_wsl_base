@@ -7,10 +7,3 @@ if [ "$WSL_VERSION" == 1 ]; then
 elif [ "$WSL_VERSION" == 2 ]; then
     export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
 fi
-
-# Set display
-export DISPLAY="$WSL_HOST:0"
-
-# Windows XSrv config
-export $(dbus-launch)
-export LIBGL_ALWAYS_INDIRECT=1
