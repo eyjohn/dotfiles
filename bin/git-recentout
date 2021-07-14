@@ -1,0 +1,20 @@
+#!/bin/bash
+
+##
+## git-recentout
+##
+## Checks out a recent branch based on `git-recent`
+##
+
+if ! [[ "$1" =~ ^[0-9]{1,}$ ]]; then
+  echo "First argument should be an integer."
+  exit 1
+fi
+
+BRANCH="$(git for-each-ref --sort=-committerdate "refs/heads/$2*" --format "%(refname:short)" | sed -n $1p)"
+if [[ -z "$BRANCH" ]]; then
+  echo 1>&2 "Invalid recent branch, run: git recent"
+  exit 1
+fi
+
+git checkout $BRANCH

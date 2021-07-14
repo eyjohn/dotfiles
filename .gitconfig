@@ -22,6 +22,7 @@
         amend = commit --amend
         ammend = commit --amend
         initmain = !git init && git checkout -b main
+
 [push]
         default = simple
 [include]
