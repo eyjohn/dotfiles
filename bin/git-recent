@@ -53,7 +53,7 @@ git for-each-ref \
   --color=always \
   --count=$COUNT \
   --sort=-committerdate \
-  "refs/heads/$1*" \
+  "refs/heads/$1**" \
   --format="$format" |
   nl -n'ln' -s' ' -w 3 |
   sed 's/\\n/\n/g' |

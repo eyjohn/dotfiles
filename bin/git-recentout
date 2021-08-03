@@ -11,7 +11,7 @@ if ! [[ "$1" =~ ^[0-9]{1,}$ ]]; then
   exit 1
 fi
 
-BRANCH="$(git for-each-ref --sort=-committerdate "refs/heads/$2*" --format "%(refname:short)" | sed -n $1p)"
+BRANCH="$(git for-each-ref --sort=-committerdate "refs/heads/$2**" --format "%(refname:short)" | sed -n $1p)"
 if [[ -z "$BRANCH" ]]; then
   echo 1>&2 "Invalid recent branch, run: git recent"
   exit 1
