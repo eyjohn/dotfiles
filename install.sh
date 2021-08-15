@@ -10,6 +10,10 @@ source "$BASE/functions.sh"
 source "$BASE/wsl/functions.sh"
 source "$BASE/mingw/functions.sh"
 
+if is_mingw && confirm "Installing in MinGW, enable symlinks during install? (you need windows developer mode enabled) [y/n]: "; then
+  source "$BASE/mingw/.profile.d/20_win_symlinks"
+fi
+
 if [ ! -L ~/.dotfiles ]; then
   echo "Adding .dotfiles link"
   ln -s "$BASE" ~/.dotfiles
@@ -112,4 +116,9 @@ WSL_VERSION=$(get_wsl_version)
 if [ -n "$WSL_VERSION" ]; then
   echo "Detected WSL Environment, Version: $WSL_VERSION"
   source $BASE/wsl/install.sh
+fi
+
+if is_mingw; then
+  echo "Detected Windows MinGW"
+  source $BASE/mingw/install.sh
 fi

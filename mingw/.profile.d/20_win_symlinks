@@ -1,0 +1,2 @@
+# Enable sym links support in mingw
+export MSYS="winsymlinks:nativestrict:$MSYS"
