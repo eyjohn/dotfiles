@@ -1,7 +1,7 @@
 # Start Global SSH Agent
 export SSH_AUTH_SOCK=~/.ssh/ssh-agent.$HOSTNAME.sock
 
-if ! pgrep -u $USER ssh-agent; then
+if ! ps -u $UID | grep -q ssh-agent; then
   rm "$SSH_AUTH_SOCK"
   ssh-agent -s -a "$SSH_AUTH_SOCK" > /dev/null
 fi

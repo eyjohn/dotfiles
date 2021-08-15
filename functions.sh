@@ -32,3 +32,19 @@ function confirm {
   read -p "$1" -n 1 -r && echo && [[ $REPLY =~ ^[Yy]$ ]]
   return $?
 }
+
+function is_linux {
+  if [[ $(uname) =~ "Linux" ]]; then
+      true
+  else
+      false
+  fi
+}
+
+function has_apt {
+  if which apt-get &> /dev/null; then
+    true
+  else
+    false
+  fi
+}

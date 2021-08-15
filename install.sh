@@ -8,6 +8,7 @@ BASE="$(
 
 source "$BASE/functions.sh"
 source "$BASE/wsl/functions.sh"
+source "$BASE/mingw/functions.sh"
 
 if [ ! -L ~/.dotfiles ]; then
   echo "Adding .dotfiles link"
@@ -43,22 +44,30 @@ if git --git-dir "$BASE/.git" remote get-url origin | grep -q ://github.com && c
   git --git-dir "$BASE/.git" remote set-url origin "$GIT_REMOTE"
 fi
 
-if confirm "Install and configure node/npm? [y/n]: "; then
-  curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-  sudo apt-get install -y nodejs
+if confirm "Auto-start ssh-agent? [y/n]: "; then
+  cp -asvb ~/.dotfiles/.profile.d/14_ssh_agent ~/.profile.d/
 fi
 
-if confirm "Install and configure golang? [y/n]: "; then
-  sudo apt -y install golang-go
-  cp -asvb ~/.dotfiles/.profile.d/16_go_path ~/.profile.d/
-fi
+if has_apt; then
 
-if confirm "Install kubectl? [y/n]: "; then
-  sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
-  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-  echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-  sudo apt-get update
-  sudo apt-get install -y kubectl
+  if confirm "Install and configure node/npm? [y/n]: "; then
+    curl -sL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+  fi
+
+  if confirm "Install and configure golang? [y/n]: "; then
+    sudo apt -y install golang-go
+    cp -asvb ~/.dotfiles/.profile.d/16_go_path ~/.profile.d/
+  fi
+
+  if confirm "Install kubectl? [y/n]: "; then
+    sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubectl
+  fi
+
 fi
 
 if which kubectl >/dev/null && confirm "Install kubectl autocomplete? [y/n]: "; then
@@ -69,23 +78,25 @@ if which kubectl >/dev/null && confirm "Set KUBECONFIG=~/.kube/* [y/n]: "; then
   cp -asvb ~/.dotfiles/.profile.d/19_kubectl_kubeconfig ~/.profile.d/
 fi
 
-if confirm "Install helm? [y/n]: "; then
-  # Uncomment when the latest version is 3 or above
-  # HELM_URL=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep body.*linux-amd64.tar.gz | sed s'/.*(\(.*linux-amd64.tar.gz\)).*/\1/')
-  HELM_URL=https://get.helm.sh/helm-v3.3.0-linux-amd64.tar.gz
-  wget -O - $HELM_URL | tar xz --strip-components=1 -C ~/bin/ linux-amd64/helm
+if is_linux; then
+  if confirm "Install helm? [y/n]: "; then
+    # Uncomment when the latest version is 3 or above
+    # HELM_URL=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep body.*linux-amd64.tar.gz | sed s'/.*(\(.*linux-amd64.tar.gz\)).*/\1/')
+    HELM_URL=https://get.helm.sh/helm-v3.3.0-linux-amd64.tar.gz
+    wget -O - $HELM_URL | tar xz --strip-components=1 -C ~/bin/ linux-amd64/helm
+  fi
+
+  if confirm "Install brig (Brigade CLI)? [y/n]: "; then
+    curl -s https://api.github.com/repos/brigadecore/brigade/releases/latest |
+      grep "browser_download_url.*linux-amd64" |
+      cut -d '"' -f 4 |
+      wget -i - -O ~/bin/brig
+    chmod +x ~/bin/brig
+    cp -asvb ~/.dotfiles/.profile.d/17_brigade_namespace ~/.profile.d/
+  fi
 fi
 
-if confirm "Install brig (Brigade CLI)? [y/n]: "; then
-  curl -s https://api.github.com/repos/brigadecore/brigade/releases/latest |
-    grep "browser_download_url.*linux-amd64" |
-    cut -d '"' -f 4 |
-    wget -i - -O ~/bin/brig
-  chmod +x ~/bin/brig
-  cp -asvb ~/.dotfiles/.profile.d/17_brigade_namespace ~/.profile.d/
-fi
-
-if confirm "Install gcloud SDK? [y/n]: "; then
+if has_apt && confirm "Install gcloud SDK? [y/n]: "; then
   # Add the Cloud SDK distribution URI as a package source
   echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
